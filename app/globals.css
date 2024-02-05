@@ -80,3 +80,9 @@ body,
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .bg-gradient {
+    @apply bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-sky-900 to-slate-950;
+  }
+}

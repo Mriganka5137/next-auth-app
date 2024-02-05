@@ -1,3 +1,4 @@
+import LoginButton from "@/components/auth/login-button";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Poppins } from "next/font/google";
@@ -10,7 +11,7 @@ export default function Home() {
   return (
     <main
       className={cn(
-        "flex h-full flex-col items-center justify-center bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-sky-900 to-slate-950"
+        "flex h-full flex-col items-center justify-center bg-gradient"
       )}
     >
       <div className=" space-y-6 text-center">
@@ -26,9 +27,11 @@ export default function Home() {
           A simple authentication service
         </p>
         <div>
-          <Button variant="secondary" size="lg" className=" text-lg">
-            Sign in
-          </Button>
+          <LoginButton>
+            <Button variant="secondary" size="lg" className=" text-lg">
+              Sign in
+            </Button>
+          </LoginButton>
         </div>
       </div>
     </main>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useTransition } from "react";
+import React, { startTransition, useState, useTransition } from "react";
 import CardWrapper from "./card-wrapper";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -18,7 +18,8 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { FromError } from "../form-error";
 import { FormSuccess } from "../form-success";
-import { login } from "@/lib/actions/login.action";
+import { loginUser } from "@/lib/actions/login.action";
+
 export const LoginForm = () => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>();
@@ -33,7 +34,7 @@ export const LoginForm = () => {
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     startTransition(() => {
-      login(values).then((data) => {
+      loginUser(values).then((data) => {
         setSuccess(data.success);
         setError(data.error);
       });

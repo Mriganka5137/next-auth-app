@@ -20,6 +20,7 @@ import { FromError } from "../form-error";
 import { FormSuccess } from "../form-success";
 import { loginUser } from "@/lib/actions/login.action";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -41,6 +42,9 @@ export const LoginForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+    setError("");
+    setSuccess("");
+
     startTransition(() => {
       loginUser(values).then((data) => {
         setSuccess(data?.success);
@@ -91,6 +95,11 @@ export const LoginForm = () => {
                       placeholder="********"
                     />
                   </FormControl>
+                  <Button variant="link" size="sm" asChild>
+                    <Link href="/auth/reset" className="px-0 font-normal">
+                      Forgot password?
+                    </Link>
+                  </Button>
                   <FormMessage />
                 </FormItem>
               )}

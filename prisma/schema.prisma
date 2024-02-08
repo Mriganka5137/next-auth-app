@@ -46,3 +46,12 @@ model Account {
 
   @@unique([provider, providerAccountId])
 }
+
+model VerificationToken {
+  id      String   @id @default(cuid())
+  token   String   @unique
+  expires DateTime
+  email   String
+
+  @@unique([email, token]) //--> means that the combination of email and token must be unique
+}

@@ -1,7 +1,5 @@
-import { Header } from "./header";
-import { BackButton } from "./back-button";
-import CardWrapper from "./card-wrapper";
 import { FaExclamationTriangle } from "react-icons/fa";
+import CardWrapper from "./card-wrapper";
 const ErrorCard = () => {
   return (
     <CardWrapper

@@ -49,9 +49,9 @@ model Account {
 
 model VerificationToken {
   id      String   @id @default(cuid())
+  email   String
   token   String   @unique
   expires DateTime
-  email   String
 
   @@unique([email, token]) //--> means that the combination of email and token must be unique
 }

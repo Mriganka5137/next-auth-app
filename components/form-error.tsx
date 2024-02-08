@@ -9,7 +9,7 @@ export const FromError = ({ message }: Props) => {
   if (!message) return null;
 
   return (
-    <div className=" flex items-center gap-x-2 bg-destructive/15 p-3 rounded-md text-sm text-destructive/80">
+    <div className=" flex items-center gap-x-2 bg-destructive/15 p-3 rounded-md text-sm text-destructive/80 justify-center">
       <FaTriangleExclamation className="h-4 w-4" />
       <p className=" ">{message}</p>
     </div>

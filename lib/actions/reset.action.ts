@@ -11,7 +11,7 @@ export const resetPassword = async (values: z.infer<typeof ResetSchema>) => {
 
   const { email } = validatedFields.data;
   const existingUser = await getUserByEmail(email);
-  if (!existingUser) return { error: "Emauil not found!" };
+  if (!existingUser) return { error: "Email not found!" };
 
   // TODO: send reset email
   return { success: "Reset email sent! Check your inbox!" };

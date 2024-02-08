@@ -19,6 +19,7 @@ import { Button } from "../ui/button";
 import { FromError } from "../form-error";
 import { FormSuccess } from "../form-success";
 import { loginUser } from "@/lib/actions/login.action";
+import { resetPassword } from "@/lib/actions/reset.action";
 
 export const ResetForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -36,7 +37,14 @@ export const ResetForm = () => {
     setError("");
     setSuccess("");
     startTransition(() => {
-      console.log(values);
+      resetPassword(values)
+        .then((data) => {
+          setSuccess(data?.success);
+          setError(data?.error);
+        })
+        .catch(() => {
+          setError("Something went wrong!");
+        });
     });
   };
 

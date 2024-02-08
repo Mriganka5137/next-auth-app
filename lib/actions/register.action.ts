@@ -3,6 +3,7 @@ import { RegisterSchema } from "@/schemas";
 import { z } from "zod";
 import { db } from "../db";
 import bcrypt from "bcryptjs";
+import { generateVerificationToken } from "../tokens";
 
 export const registerUser = async (values: z.infer<typeof RegisterSchema>) => {
   const validation = RegisterSchema.safeParse(values);
@@ -23,6 +24,7 @@ export const registerUser = async (values: z.infer<typeof RegisterSchema>) => {
   if (existingUser) {
     return { error: "Email already in use!" };
   }
+
   await db.user.create({
     data: {
       name,
@@ -32,6 +34,7 @@ export const registerUser = async (values: z.infer<typeof RegisterSchema>) => {
   });
 
   // Send verification token email
+  const verificationToken = await generateVerificationToken(email);
 
-  return { success: "User created!" };
+  return { success: "Confirmation email sent!" };
 };

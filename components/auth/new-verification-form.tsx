@@ -23,7 +23,7 @@ const NewVerificationForm = () => {
       backButtonHref="/auth/login"
       backButtonLabel="Back to login"
     >
-      {/* <PropagateLoader /> */}
+      <PropagateLoader />
     </CardWrapper>
   );
 };

@@ -41,9 +41,11 @@ const NewVerificationForm = () => {
       backButtonHref="/auth/login"
       backButtonLabel="Back to login"
     >
-      {!success && !error && <BeatLoader />}
-      <FromError message={error} />
-      <FormSuccess message={success} />
+      <div className=" flex flex-col items-center justify-center w-full">
+        {!success && !error && <BeatLoader />}
+        <FromError message={error} />
+        <FormSuccess message={success} />
+      </div>
     </CardWrapper>
   );
 };

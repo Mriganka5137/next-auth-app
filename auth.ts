@@ -34,7 +34,9 @@ export const {
       // Prevent sign in if email is not verified
       if (!existingUser?.emailVerified) return false;
 
-      // TODO - Add 2FA Check
+      if (existingUser.isTwoFactorEnabled) {
+        return false;
+      }
 
       return true;
     },

@@ -18,14 +18,16 @@ enum UserRole {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  password      String?
-  role          UserRole  @default(USER)
-  accounts      Account[]
+  id                    String                 @id @default(cuid())
+  name                  String?
+  email                 String?                @unique
+  emailVerified         DateTime?
+  image                 String?
+  password              String?
+  role                  UserRole               @default(USER)
+  accounts              Account[]
+  isTwoFactorEnabled    Boolean                @default(false)
+  twoFactorConfirmation TwoFactorConfirmation?
 }
 
 model Account {
@@ -63,4 +65,21 @@ model PasswordResetToken {
   expires DateTime
 
   @@unique([email, token]) //--> means that the combination of email and token must be unique
+}
+
+model TwoFactorToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token]) //--> means that the combination of email and token must be unique
+}
+
+model TwoFactorConfirmation {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade) //--? relation to the user model and the user id field. onDelete: Cascade means that if the user is deleted, the confirmation will also be deleted
+
+  @@unique([userId])
 }

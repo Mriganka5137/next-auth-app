@@ -6,8 +6,8 @@ import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { LoginSchema } from "@/schemas";
 import { AuthError } from "next-auth";
 import { z } from "zod";
-import { generateVerificationToken } from "../tokens";
-import { sendVerificationEmail } from "../mail";
+import { generateVerificationToken, generateTwoFactorToken } from "../tokens";
+import { sendVerificationEmail, sendTwoFactorTokenEmail } from "../mail";
 
 export const loginUser = async (values: z.infer<typeof LoginSchema>) => {
   const validation = LoginSchema.safeParse(values);
@@ -33,6 +33,14 @@ export const loginUser = async (values: z.infer<typeof LoginSchema>) => {
     );
 
     return { success: "Confirmation email sent!" };
+  }
+
+  // if two factor is enabled,generate and send two factor token
+  if (existingUser.isTwoFactorEnabled && existingUser.email) {
+    const twoFactorToken = await generateTwoFactorToken(existingUser.email);
+    await sendTwoFactorTokenEmail(twoFactorToken.email, twoFactorToken.token);
+
+    return { twoFactor: true }; // break and show two factor form
   }
 
   try {

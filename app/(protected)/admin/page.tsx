@@ -8,6 +8,7 @@ import { useCurrentRole } from "@/hooks/useCurrentRole";
 import { UserRole } from "@prisma/client";
 import {} from "@/components/ui/sonner";
 import { toast } from "sonner";
+import { admin } from "@/lib/actions/admin.action";
 const AdminPage = () => {
   const role = useCurrentRole();
 
@@ -24,6 +25,15 @@ const AdminPage = () => {
     }
   };
 
+  const handleServerActionClick = async () => {
+    const response = await admin();
+    if (response.status === 200) {
+      toast.success("You are allowed to see this content");
+    }
+    if (response.status === 403) {
+      toast.error("You are not allowed to see this content");
+    }
+  };
   return (
     <Card className=" w-[600px]">
       <CardHeader>
@@ -39,7 +49,7 @@ const AdminPage = () => {
         </div>
         <div className=" flex flex-row items-center justify-between rounded-lg p-3 border shadow-md">
           <p className=" text-sm font-medium">Admin-only Server Action</p>
-          <Button>Click to test</Button>
+          <Button onClick={handleServerActionClick}>Click to test</Button>
         </div>
       </CardContent>
     </Card>

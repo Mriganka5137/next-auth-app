@@ -1,5 +1,6 @@
 import { ExtendedUser } from "@/next-auth";
 import { Card, CardContent, CardHeader } from "../ui/card";
+import { Badge } from "../ui/badge";
 
 interface UserInfoProps {
   user?: ExtendedUser;
@@ -39,9 +40,9 @@ export const UserInfo = ({ user, label }: UserInfoProps) => {
         </div>
         <div className=" flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
           <p className=" text-sm font-medium">Two Factor Authentication</p>
-          <p className=" truncate text-xs max-w-[180px] font-mono bg-slate-100 rounded-sm p-1">
-            OFF
-          </p>
+          <Badge variant={user?.isTwoFactorEnabled ? "success" : "destructive"}>
+            {user?.isTwoFactorEnabled ? "ON" : "OFF"}
+          </Badge>
         </div>
       </CardContent>
     </Card>

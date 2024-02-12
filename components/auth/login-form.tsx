@@ -24,6 +24,7 @@ import Link from "next/link";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
@@ -47,7 +48,7 @@ export const LoginForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      loginUser(values)
+      loginUser(values, callbackUrl)
         .then((data) => {
           if (data?.error) {
             form.reset();

@@ -50,7 +50,7 @@ const SettingsPage = () => {
       email: user?.email || undefined,
       password: undefined,
       newPassword: undefined,
-      isTwoFactorEnabled: false,
+      isTwoFactorEnabled: user?.isTwoFactorEnabled || undefined,
       role: user?.role || undefined,
     },
   });

@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Authentication using Auth.js",
-  description: "",
+  description: " Authentication using auth.js",
 };
 
 export default async function RootLayout({

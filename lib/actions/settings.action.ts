@@ -17,6 +17,9 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
     return { error: "Unauthorized!" };
   }
 
+  if (!values.name) {
+    return { error: "Name cannot be empty!" };
+  }
   // Update the user
   await db.user.update({
     where: { id: dbuser.id },

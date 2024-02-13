@@ -1,7 +1,6 @@
-## Reusable NextAuth Authentication Toolkit
-
-### Overview
 This project is a versatile authentication solution built using NextAuth v5, Prisma ORM, and a Postgres database. It enables streamlined user onboarding and management with support for various login methods, including email/password, Google, and GitHub OAuth logins. The authentication toolkit also incorporates robust security measures such as two-factor authentication (2FA) to enhance user account protection and ensure data integrity.
+
+## Reusable NextAuth Authentication Toolkit
 
 ### Features
 - **Streamlined User Onboarding:** Supports multiple login methods, making it easy for users to sign up and log in using their preferred credentials.
